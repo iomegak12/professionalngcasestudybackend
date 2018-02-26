@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Learning Web Socket Client</title>
+
+</head>
+
+<body>
+    <script src='socket.io.js'></script>
+    <script type='text/javascript'>
+        var socketUrl = `${window.location.protocol}//${window.location.hostname}:${window.location.port}`;
+        var socketClient = io.connect(socketUrl);
+
+        if (!socketClient) {
+            console.log('Unable to Establish Socket Client Connection ...');
+        } else {
+            console.log('Socket Client Connection Established Successfully ...');
+
+            socketClient.on('NewCustomerRecord', (message) => {
+                console.log(`Socket Notification Received ... ${JSON.stringify(message)}`);
+            });
+        }
+    </script>
+</body>
+
+</html>
