@@ -41,9 +41,9 @@ class CRMSystemHost {
     initializeMiddleware() {
         this.app.use(this.handleUnauthorizedError);
         this.app.use(this.applyCors);
-        this.app.use(API_CUSTOMERS_DEFINITION, expressJwt({
-            secret: this.globalSecretKey
-        }));
+        /// this.app.use(API_CUSTOMERS_DEFINITION, expressJwt({
+        ///    secret: this.globalSecretKey
+        /// }));
         this.app.use(bodyParser.json());
         this.app.use(morgan(':id :method :url :response-time'));
         this.app.use(API_CUSTOMERS_DEFINITION, this.customerRouting.Router);

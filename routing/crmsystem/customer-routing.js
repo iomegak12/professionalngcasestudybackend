@@ -5,6 +5,8 @@ let HttpStatusCodes = require('../../utilities').HttpStatusCodes;
 
 const NO_RECORDS = 1;
 const NEW_CUSTOMER_RECORD = 'NewCustomerRecord';
+const FIRST_RECORD = 0;
+const LAST_RECORD = 9;
 
 let router = express.Router();
 
@@ -19,8 +21,9 @@ class CustomerRoutingDefinition {
     initializeRouting() {
         router.get('/', async (request, response) => {
             let customers = await this.customerService.getCustomers();
+            let filteredCustomers = customers.slice(FIRST_RECORD, LAST_RECORD);
 
-            response.status(HttpStatusCodes.OK).send(customers);
+            response.status(HttpStatusCodes.OK).send(filteredCustomers);
         });
 
         router.get('/:customerId', async (request, response) => {
