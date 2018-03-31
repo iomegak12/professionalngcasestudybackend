@@ -1,6 +1,6 @@
 let express = require('express');
 let Customer = require('../../models/crmsystem').Customer;
-let CustomerService = require('../../services/crmsystem').CustomerService;
+let CustomerService = require('../../services/crmsystem/customer-service');
 let HttpStatusCodes = require('../../utilities').HttpStatusCodes;
 
 const NO_RECORDS = 1;
