@@ -7,9 +7,7 @@ const DEFAULT_SECRET_KEY = process.env.SECRET_KEY;
 
 let CRMSystemHost = require('./hosting/crmsystem').CRMSystemHost;
 let portNumber = minimist.portNumber || DEFAULT_PORT;
-
-globalSecretKey = minimist.globalSecretKey || DEFAULT_SECRET_KEY;
-
+let globalSecretKey = minimist.globalSecretKey || DEFAULT_SECRET_KEY;
 let host = new CRMSystemHost(portNumber, globalSecretKey);
 
 host.startServer()

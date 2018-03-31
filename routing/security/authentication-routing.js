@@ -6,9 +6,9 @@ let JwtSignGenerator = require('../../utilities').JwtSignGenerator;
 let router = express.Router();
 
 class AuthenticationRoutingDefinition {
-    constructor() {
+    constructor(globalSecretKey) {
         this.userProfileService = new UserProfileService();
-
+        this.globalSecretKey = globalSecretKey;
         this.initializeRouting();
     }
 
@@ -35,7 +35,7 @@ class AuthenticationRoutingDefinition {
                     role: userProfile.role
                 };
 
-                let signature = JwtSignGenerator.sign(formattedUserProfile, globalSecretKey);
+                let signature = JwtSignGenerator.sign(formattedUserProfile, this.globalSecretKey);
 
                 response.status(HttpStatusCodes.OK)
                     .send({

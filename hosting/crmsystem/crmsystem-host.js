@@ -33,7 +33,7 @@ class CRMSystemHost {
         this.httpServer = http.createServer(this.app);
         this.pushNotificationService = new PushNotificationService(this.httpServer);
         this.customerRouting = new CustomerRoutingDefinition(this.pushNotificationService);
-        this.authenticationRouting = new AuthenticationRoutingDefinition();
+        this.authenticationRouting = new AuthenticationRoutingDefinition(this.globalSecretKey);
 
         this.initializeMiddleware();
     }
@@ -41,9 +41,11 @@ class CRMSystemHost {
     initializeMiddleware() {
         this.app.use(this.handleUnauthorizedError);
         this.app.use(this.applyCors);
-        /// this.app.use(API_CUSTOMERS_DEFINITION, expressJwt({
-        ///    secret: this.globalSecretKey
-        /// }));
+        
+        this.app.use(API_CUSTOMERS_DEFINITION, expressJwt({
+            secret: this.globalSecretKey
+        }));
+        
         this.app.use(bodyParser.json());
         this.app.use(morgan(':id :method :url :response-time'));
         this.app.use(API_CUSTOMERS_DEFINITION, this.customerRouting.Router);

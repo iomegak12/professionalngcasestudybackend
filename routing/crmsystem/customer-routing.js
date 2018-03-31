@@ -1,6 +1,6 @@
 let express = require('express');
 let Customer = require('../../models/crmsystem').Customer;
-let CustomerService = require('../../services/crmsystem').CustomerDbService;
+let CustomerService = require('../../services/crmsystem').CustomerService;
 let HttpStatusCodes = require('../../utilities').HttpStatusCodes;
 
 const NO_RECORDS = 1;
@@ -21,9 +21,8 @@ class CustomerRoutingDefinition {
     initializeRouting() {
         router.get('/', async (request, response) => {
             let customers = await this.customerService.getCustomers();
-            let filteredCustomers = customers.slice(FIRST_RECORD, LAST_RECORD);
 
-            response.status(HttpStatusCodes.OK).send(filteredCustomers);
+            response.status(HttpStatusCodes.OK).send(customers);
         });
 
         router.get('/:customerId', async (request, response) => {
