@@ -43,7 +43,7 @@ class CRMSystemHost {
         this.app.use(this.applyCors);
         
         this.app.use(API_CUSTOMERS_DEFINITION, expressJwt({
-            secret: this.globalSecretKey
+             secret: this.globalSecretKey
         }));
         
         this.app.use(bodyParser.json());
